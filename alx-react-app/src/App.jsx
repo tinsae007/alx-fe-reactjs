@@ -38,5 +38,15 @@ function App() {
     </>
   )
 }
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
 
-export default App
+export default App;
+
