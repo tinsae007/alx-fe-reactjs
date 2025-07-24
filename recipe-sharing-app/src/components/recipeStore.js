@@ -1,3 +1,4 @@
+// src/components/recipeStore.js
 import create from 'zustand';
 
 export const useRecipeStore = create((set) => ({
@@ -17,6 +18,4 @@ export const useRecipeStore = create((set) => ({
     set((state) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== id),
     })),
-
-  setRecipes: (recipes) => set({ recipes }),
 }));
