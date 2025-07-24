@@ -1,8 +1,8 @@
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import React from 'react';
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
@@ -24,6 +24,27 @@ function App() {
       <AddRecipeForm />
       <RecipeList />
     </div>
+  );
+}
+function App() {
+  return (
+    <Router>
+      <div style={{ padding: '1rem' }}>
+        <h1>Recipe Sharing App</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AddRecipeForm />
+                <RecipeList />
+              </>
+            }
+          />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
