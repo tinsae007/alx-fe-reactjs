@@ -33,7 +33,7 @@ const Search = () => {
       else if (form.username) {
         const user = await fetchUserData(form.username);
         if (!user || user.message === "Not Found") {
-          setError("Looks like we can't find the user");
+          setError("Looks like we cant find the user");
         } else {
           setUsers([user]);
         }
@@ -42,7 +42,7 @@ const Search = () => {
         setError('Please enter a search value');
       }
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
