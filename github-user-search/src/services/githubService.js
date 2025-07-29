@@ -13,3 +13,10 @@ export const fetchAdvancedUsers = async ({ username, location, minRepos }) => {
 
   return response.data;
 };
+const token = import.meta.env.VITE_GITHUB_API_KEY;
+
+const headers = token
+  ? { Authorization: `token ${token}` }
+  : {};
+
+const response = await axios.get(url, { headers });
