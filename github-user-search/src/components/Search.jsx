@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fetchAdvancedUsers } from '../services/githubService';
+import { fetchUserData, fetchAdvancedUsers } from '../services/githubService';
 
 const Search = () => {
   const [form, setForm] = useState({ username: '', location: '', repos: '' });
@@ -17,21 +17,29 @@ const Search = () => {
     setError('');
     setUsers([]);
 
-    // Build search criteria, but call only fetchAdvancedUsers
     try {
-      // If no criteria entered, prompt user
-      if (!form.username && !form.location && !form.repos) {
+      let data;
+
+      // If location or repos filter exists, do advanced search
+      if (form.location || form.repos) {
+        data = await fetchAdvancedUsers(form);
+        if (!data.items || data.items.length === 0) {
+          setError("Looks like we can't find the user");
+        } else {
+          setUsers(data.items);
+        }
+      } 
+      // Otherwise, if username is given, do basic user fetch
+      else if (form.username) {
+        const user = await fetchUserData(form.username);
+        if (!user || user.message === "Not Found") {
+          setError("Looks like we can't find the user");
+        } else {
+          setUsers([user]);
+        }
+      } 
+      else {
         setError('Please enter a search value');
-        setLoading(false);
-        return;
-      }
-
-      const data = await fetchAdvancedUsers(form);
-
-      if (!data.items || data.items.length === 0) {
-        setError("Looks like we can't find the user");
-      } else {
-        setUsers(data.items);
       }
     } catch (err) {
       setError("Looks like we can't find the user");
