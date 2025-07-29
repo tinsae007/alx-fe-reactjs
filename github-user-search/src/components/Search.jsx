@@ -17,11 +17,24 @@ const Search = () => {
     setError('');
     setUsers([]);
 
+    // Build search criteria, but call only fetchAdvancedUsers
     try {
+      // If no criteria entered, prompt user
+      if (!form.username && !form.location && !form.repos) {
+        setError('Please enter a search value');
+        setLoading(false);
+        return;
+      }
+
       const data = await fetchAdvancedUsers(form);
-      setUsers(data.items || []);
+
+      if (!data.items || data.items.length === 0) {
+        setError("Looks like we can't find the user");
+      } else {
+        setUsers(data.items);
+      }
     } catch (err) {
-      setError('Looks like we cant find the user');
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
