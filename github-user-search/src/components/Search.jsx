@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { fetchUserData, fetchAdvancedUsers } from '../services/githubService';
+import { fetchAdvancedUsers } from '../services/githubService';
 
 const Search = () => {
-  const [form, setForm] = useState({ username: '', location: '', minRepos: '' });
+  const [form, setForm] = useState({ username: '', location: '', repos: '' });
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -18,35 +18,10 @@ const Search = () => {
     setUsers([]);
 
     try {
-      let data;
-
-      if (form.location || form.minRepos) {
-        data = await fetchAdvancedUsers(form);
-
-        if (!data.items || data.items.length === 0) {
-          setError("Looks like we can't find the user");
-          setUsers([]);
-        } else {
-          setUsers(data.items);
-          setError('');
-        }
-      } else if (form.username) {
-        const user = await fetchUserData(form.username);
-
-        if (!user || user.message === 'Not Found') {
-          setError("Looks like we can't find the user");
-          setUsers([]);
-        } else {
-          setUsers([user]);
-          setError('');
-        }
-      } else {
-        setError('Please enter a search value');
-        setUsers([]);
-      }
+      const data = await fetchAdvancedUsers(form);
+      setUsers(data.items || []);
     } catch (err) {
-      setError("Looks like we can't find the user");
-      setUsers([]);
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
@@ -72,8 +47,8 @@ const Search = () => {
           className="w-full border border-gray-300 p-2 rounded"
         />
         <input
-          name="minRepos"
-          value={form.minRepos}
+          name="repos"
+          value={form.repos}
           onChange={handleChange}
           type="number"
           placeholder="Min public repos"
