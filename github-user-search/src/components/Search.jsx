@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { fetchAdvancedUsers } from '../services/githubService';
 import { fetchUserData, fetchAdvancedUsers } from '../services/githubService';
 
-
 const Search = () => {
-  const [form, setForm] = useState({ username: '', location: '', repos: '' });
+  const [form, setForm] = useState({ username: '', location: '', minRepos: '' });
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -20,10 +18,20 @@ const Search = () => {
     setUsers([]);
 
     try {
-      const data = await fetchAdvancedUsers(form);
-      setUsers(data.items || []);
+      let data;
+
+      if (form.location || form.minRepos) {
+        data = await fetchAdvancedUsers(form);
+        setUsers(data.items || []);
+      } else if (form.username) {
+        const user = await fetchUserData(form.username);
+        setUsers([user]);
+      } else {
+        setError('Please enter a search value');
+        return;
+      }
     } catch (err) {
-      setError('Looks like we cant find the user');
+      setError('Looks like we can’t find the user');
     } finally {
       setLoading(false);
     }
@@ -49,8 +57,8 @@ const Search = () => {
           className="w-full border border-gray-300 p-2 rounded"
         />
         <input
-          name="repos"
-          value={form.repos}
+          name="minRepos"
+          value={form.minRepos}
           onChange={handleChange}
           type="number"
           placeholder="Min public repos"
