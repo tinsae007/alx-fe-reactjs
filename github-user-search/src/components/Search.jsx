@@ -22,16 +22,31 @@ const Search = () => {
 
       if (form.location || form.minRepos) {
         data = await fetchAdvancedUsers(form);
-        setUsers(data.items || []);
+
+        if (!data.items || data.items.length === 0) {
+          setError("Looks like we can't find the user");
+          setUsers([]);
+        } else {
+          setUsers(data.items);
+          setError('');
+        }
       } else if (form.username) {
         const user = await fetchUserData(form.username);
-        setUsers([user]);
+
+        if (!user || user.message === 'Not Found') {
+          setError("Looks like we can't find the user");
+          setUsers([]);
+        } else {
+          setUsers([user]);
+          setError('');
+        }
       } else {
         setError('Please enter a search value');
-        return;
+        setUsers([]);
       }
     } catch (err) {
-      setError('Looks like we can’t find the user');
+      setError("Looks like we can't find the user");
+      setUsers([]);
     } finally {
       setLoading(false);
     }
