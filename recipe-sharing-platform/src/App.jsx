@@ -4,12 +4,20 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react';
 import HomePage from './components/HomePage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RecipeDetail from './components/RecipeDetail';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
     <div className="min-h-screen bg-gray-100">
       <HomePage />
     </div>

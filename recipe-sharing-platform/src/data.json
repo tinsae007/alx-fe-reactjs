@@ -3,14 +3,64 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/600x400",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 large eggs",
+      "50g pecorino cheese",
+      "Freshly ground black pepper",
+      "Salt"
+    ],
+    "instructions": [
+      "Cook spaghetti in salted boiling water until al dente.",
+      "Fry pancetta until crispy.",
+      "Beat eggs with pecorino cheese and pepper.",
+      "Drain pasta and mix quickly with egg mixture and pancetta off the heat.",
+      "Serve immediately with extra cheese and pepper."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/600x400",
+    "ingredients": [
+      "500g chicken breast",
+      "150g yogurt",
+      "2 tbsp tikka masala spice mix",
+      "1 onion",
+      "400g canned tomatoes",
+      "100ml cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and tikka masala spices for at least 1 hour.",
+      "Grill or fry the chicken pieces until cooked through.",
+      "Sauté onions, add tomatoes and cook down to a sauce.",
+      "Add grilled chicken to sauce, stir in cream and simmer for 10 minutes.",
+      "Serve hot with rice or naan."
+    ]
   },
   {
     "id": 3,
-    "title": "Beef Strog
+    "title": "Beef Stroganoff",
+    "summary": "Tender beef strips in a creamy mushroom sauce served over noodles.",
+    "image": "https://via.placeholder.com/600x400",
+    "ingredients": [
+      "400g beef strips",
+      "1 onion, sliced",
+      "200g mushrooms, sliced",
+      "150ml sour cream",
+      "1 tbsp Dijon mustard",
+      "Butter",
+      "Salt and pepper"
+    ],
+    "instructions": [
+      "Sauté onions and mushrooms in butter.",
+      "Add beef strips and cook until browned.",
+      "Stir in sour cream and mustard.",
+      "Simmer gently until sauce thickens.",
+      "Serve over cooked noodles."
+    ]
+  }
+]
